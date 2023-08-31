@@ -4,16 +4,23 @@
 int max(int a, int b);
 int height(const binary_tree_t *node);
 
-int binary_tree_balance(const binary_tree_t *tree)
+int binary_tree_is_perfect(const binary_tree_t *tree)
 {
-	int letf, rights;
+	int letf, rights, sub_left, sub_right;
 
 	if (tree == NULL)
 		return (0);
 	letf = height(tree->left);
 	rights = height(tree->right);
 
-	return (letf - rights);
+	if (letf == rights)
+	{
+		sub_left = binary_tree_is_perfect(tree->left);
+		sub_right = binary_tree_is_perfect(tree->right);
+
+		return (sub_left && sub_right);
+	}
+	return (0);
 }
 int max(int a, int b)
 {
